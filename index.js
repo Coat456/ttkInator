@@ -279,7 +279,11 @@ function gunTTK(n, r, d, lbd, hsd, uld) {
 
         alert("Please Do Not Leave Anything Blank");
     } else {
-        logDTTK();
+        gunTTKD(
+            document.querySelector('#bs'),
+            document.querySelector('#lbs'),
+            document.querySelector('#hss'),
+            document.querySelector('#uls'));
         let ttk = (((health / this.Dmg + (1 - ((health % this.Dmg) / this.Dmg))) - 1) / (this.RPM / 60)) * 1000;
         console.log(ttk);
         showTTK.value = Math.round(ttk).toString()+"ms";
@@ -568,16 +572,18 @@ function textFilledLBD(lbd) {
     console.log("fatMonkeyDookie");
     if (lbd.value > 0) {
         LBDF = true
-    } else
+    } else{
         LBDF = false
+    }
         logDTTK()
 }
 function textFilledHSD(hsd) {
 
     if (hsd.value > 0) {
         HSDF = true
-    } else
+    } else{
         HSDF = false
+    }
         logDTTK()
 }
 let ULDF = false;
@@ -585,8 +591,9 @@ function textFilledULD(uld) {
 
     if (uld.value > 0) {
         ULDF = true
-    } else
+    } else{
         ULDF = false
+    }
         logDTTK()
 }
 function logDTTK(){
