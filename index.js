@@ -426,7 +426,7 @@ function getTTKD() {
         nbs = 0;
     }
     if (isNaN(parseInt(nuls))) {
-        nbs = 0;
+        nuls = 0;
     }
     if (isNaN(parseInt(nhs))) {
         nhs = 0;
