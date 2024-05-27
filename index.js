@@ -128,7 +128,7 @@ function logGun() {
     console.log(valuesNull(checkNull));
 
     if (valuesZero(checkZero) || !firstCalc || valuesNull(checkNull)) {
-        alert("ya dun messed up now boy lemme tell ya");
+        alert("Please Do Not Leave Anything Blank");
     }else{
       //  if(gearExists(this.name))
         console.log(gearExists(this.name));
@@ -277,12 +277,12 @@ function gunTTK(n, r, d, lbd, hsd, uld) {
     if (valuesZero(checkZero) || valuesNull(checkNull)) {
         console.log("hallo");
 
-        alert("Same Shi");
+        alert("Please Do Not Leave Anything Blank");
     } else {
-
+        logDTTK();
         let ttk = (((health / this.Dmg + (1 - ((health % this.Dmg) / this.Dmg))) - 1) / (this.RPM / 60)) * 1000;
         console.log(ttk);
-        showTTK.value = Math.round(ttk).toString() + "ms";
+        showTTK.value = Math.round(ttk).toString()+"ms";
     }
 }
 function loadGear(ph) {
@@ -426,7 +426,7 @@ function getTTKD() {
         nbs = 0;
     }
     if (isNaN(parseInt(nuls))) {
-        nuls = 0;
+        nuls= 0;
     }
     if (isNaN(parseInt(nhs))) {
         nhs = 0;
@@ -443,7 +443,7 @@ function getTTKD() {
     ttkD = totalShots / (this.RPM / 60)
     console.log(ttkD);
     if (mHealth <= 0) {
-        showDTTK.value = (ttkD*1000).toString() + "ms";
+        showDTTK.value = (ttkD*1000).toString()+"ms";
         showmHealth.value = "dead"
     } else {
         showmHealth.value = mHealth.toString() + "hp left"
