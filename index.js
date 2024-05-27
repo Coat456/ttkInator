@@ -282,7 +282,7 @@ function gunTTK(n, r, d, lbd, hsd, uld) {
 
         let ttk = (((health / this.Dmg + (1 - ((health % this.Dmg) / this.Dmg))) - 1) / (this.RPM / 60)) * 1000;
         console.log(ttk);
-        showTTK.value = Math.round(ttk);
+        showTTK.value = Math.round(ttk).toString() + "ms";
     }
 }
 function loadGear(ph) {
@@ -443,7 +443,7 @@ function getTTKD() {
     ttkD = totalShots / (this.RPM / 60)
     console.log(ttkD);
     if (mHealth <= 0) {
-        showDTTK.value = ttkD;
+        showDTTK.value = (ttkD*1000).toString() + "ms";
         showmHealth.value = "dead"
     } else {
         showmHealth.value = mHealth.toString() + "hp left"
