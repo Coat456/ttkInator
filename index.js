@@ -24,36 +24,7 @@ var numUpLegshot =0;
 let ttkD;
 let firstCalc = false;
 var thisGear
-// startOptions();
-function startOptions() {
-    updateOptions();
-    bs = document.getElementById("bs");
-    lbs = document.getElementById("lbs");
-    hss = document.getElementById("hss");
-    var option = document.createElement("option");
-    for (i = 0; (i <= maxBodyshot); i++) {
-        option = document.createElement("option");
-        option.text = i;
-        if (i != numBodyshot) {
-            bs.add(option);
-        }
-    }
-    for (i = 0; (i <= maxLowerBodyshot); i++) {
-        option = document.createElement("option");
-        option.text = i;
-        if (i != numLowerBodyshot) {
-            lbs.add(option);
-        }
-    }
-    for (i = 0; (i <= maxHeadshot); i++) {
-        option = document.createElement("option");
-        option.text = i;
-        if (i != numHeadshot) {
-            hss.add(option);
-        }
-    }
 
-}
 
 function listDefault(){
     dPushGear("BP50", 33, 30 ,28, 28, 857.1)
@@ -130,7 +101,6 @@ function logGun() {
     if (valuesZero(checkZero) || !firstCalc || valuesNull(checkNull)) {
         alert("Please Do Not Leave Anything Blank");
     }else{
-      //  if(gearExists(this.name))
         console.log(gearExists(this.name));
     if(gearExists(this.name).toString()=="false"&& this.name.toString().length<15){
     pushGear();
@@ -164,7 +134,6 @@ function logGun() {
     alert("Gun Name Too Long");
 }
 }
-    // console.log(allgears[this.chooser][0]);
 }
 function gearExists(gn){
 
@@ -181,7 +150,6 @@ function gearID() {
     return ((allgears.length - 1));
 }
 function toggleVisible(e) {
-    //addOptions();
     var x = document.getElementById(e);
     if (x.style.display === "none") {
         x.style.display = "block";
@@ -258,14 +226,15 @@ function getUL() {
     return gear[5]
 }
 
-function gunTTK(n, r, d, lbd, hsd, uld) {
+function gunTTK() {
     firstCalc = true;
-    this.upLegDmg = uld.value;
-    this.name = n.value;
-    this.RPM = r.value;
-    this.Dmg = d.value;
-    this.lowerBodyDmg = lbd.value;
-    this.headDmg = hsd.value;
+
+    this.upLegDmg = document.querySelector('#userInput5').value
+    this.name = document.querySelector('#userInput').value
+    this.RPM = document.querySelector('#userInput1').value
+    this.Dmg = document.querySelector('#userInput2').value
+    this.lowerBodyDmg = document.querySelector('#userInput3').value
+    this.headDmg = document.querySelector('#userInput4').value
 
     console.log(valuesZero(checkZero))
 
@@ -279,11 +248,10 @@ function gunTTK(n, r, d, lbd, hsd, uld) {
 
         alert("Please Do Not Leave Anything Blank");
     } else {
-        gunTTKD(
-            document.querySelector('#bs'),
-            document.querySelector('#lbs'),
-            document.querySelector('#hss'),
-            document.querySelector('#uls'));
+        if(ULDF&&HSDF&&LBDF){
+    gunTTKD();
+        }
+
         let ttk = (((health / this.Dmg + (1 - ((health % this.Dmg) / this.Dmg))) - 1) / (this.RPM / 60)) * 1000;
         console.log(ttk);
         showTTK.value = Math.round(ttk).toString()+"ms";
@@ -307,8 +275,7 @@ function loadGear(ph) {
     textFilledULD(document.querySelector('#userInpu53'));
     console.log(crpm.value);
 
-// gunTTK(AgetGearName(thisGear),AgetGearRPM(thisGear),
-// AgetGearDmg(thisGear), AgetGearLbDmg(thisGear),AgetGearHD(thisGear),AgetGearUL(thisGear));
+
     console.log(ph.value);
 }
 function loadDefault(ph){
@@ -326,31 +293,37 @@ function loadDefault(ph){
     textFilledHSD(document.querySelector('#userInput4'));
     textFilledLBD(document.querySelector('#userInput3'));
     textFilledULD(document.querySelector('#userInput5'));
-    // gunTTK(alldGear[thisGear][0],alldGear[thisGear][1],
-    //     alldGear[thisGear][2],alldGear[thisGear][3],
-    //     alldGear[thisGear][4], alldGear[thisGear][5]);
+
     addOptions();
 }
-function gunTTKD(b, lb, hs,ul) {
+function gunTTKD() {
+
+
+
     checkZero[this.lowerBodyDmg, this.Dmg, this.headDmg, this.upLegDmg]
     if (valuesZero(checkZero)) {
         console.log("hallo");
         alert("Please Put Values");
     } else {
         mHealth = 300;
-        numUpLegshot = ul.value;
-        numBodyshot = b.value;
-        numLowerBodyshot = lb.value;
-        numHeadshot = hs.value;
+        numUpLegshot = document.querySelector('#uls').value
+        numBodyshot = document.querySelector('#bs').value
+        numLowerBodyshot =document.querySelector('#lbs').value
+        numHeadshot = document.querySelector('#hss').value
         console.log(upLegDmg);
-        mHealth = mHealth - numBodyshot * this.Dmg;
-        mHealth = mHealth - numHeadshot * this.headDmg;
-        mHealth = mHealth - numLowerBodyshot * this.lowerBodyDmg;
-        mHealth = mHealth - numUpLegshot * this.upLegDmg;
+
+        getmHealth(numBodyshot,this.Dmg);
+        getmHealth(numHeadshot,this.headDmg);
+        getmHealth(numLowerBodyshot,this.lowerBodyDmg);
+        getmHealth(numUpLegshot,this.upLegDmg);
         console.log(mHealth);
         getTTKD();
         addOptions();
     }
+
+}
+function getmHealth(numShots, dmg){
+    mHealth -=numShots*dmg;
 }
 function valuesNull(x) {
     for (i = 0; i < x.length; i++) {
@@ -375,31 +348,39 @@ function valuesZero(x) {
 
 function autoCalc() {
     if (bd && rpmf) {
-        gunTTK(document.getElementById('userInput'),
-            document.getElementById('userInput1'),
-            document.getElementById('userInput2'),
-            document.getElementById('userInput3'),
-            document.getElementById('userInput4'),
-            document.getElementById('userInput5'));
+        gunTTK();
             console.log(document.getElementById('userInput1').value)
     }
 }
 
 let nf = false;
-function nameFill() {
+function nameFill(x) {
+    if(x.value>0){
     nf = true;
+    }else{
+        nf=false
+    }
     autoCalc();
 }
 let bd = false;
-function bDmgFill() {
-    bd = true;
-    autoCalc();
+function bDmgFill(x) {
+    if(x.value>0){
+        bd = true;
+        }else{
+            bd=false
+        }
+        autoCalc();
 }
 let rpmf = false;
-function rpmFill() {
-    rpmf = true;
-    autoCalc();
+function rpmFill(x) {
+    if(x.value>0){
+        rpmf = true;
+        }else{
+            rpmf=false
+        }
+        autoCalc();
 }
+
 function getTTKD() {
     var nbs;
     var nlbs;
@@ -438,11 +419,12 @@ function getTTKD() {
     if (isNaN(parseInt(nlbs))) {
         nlbs = 0;
     }
+
     console.log(!isNaN(parseInt(nhs)));
     console.log(nbs);
 
 
-    let totalShots = (parseInt(nbs) + parseInt(nhs) + parseInt(nlbs) + parseInt(nuls));
+    let totalShots = ((nbs) + (nhs) + (nlbs) + (nuls));
     console.log(parseInt(totalShots));
     ttkD = totalShots / (this.RPM / 60)
     console.log(ttkD);
@@ -454,6 +436,8 @@ function getTTKD() {
     }
 
 }
+
+
 function updateOptions() {
     checkZero = [this.Dmg, this.RPM, this.lowerBodyDmg, this.headDmg, this.upLegDmg]
     checkNull = [this.name]
@@ -482,6 +466,25 @@ function updateOptions() {
 function healthDepleted() {
     return mHealth <= 0;
 }
+var l;
+function removeOption(list){
+   l= list.options.length-1
+   for(i=l;i>=0;i--){
+    list.remove(i);
+   }
+}
+function includeOptions(list, numShot, maxShot){
+    option = document.createElement("option");
+    option.text = numShot;
+    list.add(option);
+    for (j = 0; (j <= maxShot) || j < numShot; j++) {
+        option = document.createElement("option");
+        option.text = j;
+        if (j != numShot || j == 0) {
+            list.add(option);
+        }
+    }
+}
 function addOptions() {
     uls = document.getElementById("uls")
     bs = document.getElementById("bs");
@@ -489,85 +492,25 @@ function addOptions() {
     hss = document.getElementById("hss");
     var option = document.createElement("option");
 
-    var i, l = bs.options.length - 1;
-    for (i = l; i >= 0; i--) {
+    removeOption(bs)
+    removeOption(uls)
+    removeOption(lbs)
+    removeOption(hss)
 
-        bs.remove(i);
-    }
-    l = lbs.options.length - 1;
-    for (i = l; i >= 0; i--) {
-        option = document.createElement("option");
-        option.text = i;
-        lbs.remove(option);
-    }
-    l = hss.options.length - 1;
-    for (i = l; i >= 0; i--) {
-        option = document.createElement("option");
-        option.text = i;
-        hss.remove(option);
-    }
-    l = uls.options.length - 1;
-    for (i = l; i >= 0; i--) {
-        option = document.createElement("option");
-        option.text = i;
-        uls.remove(option);
-    }
+   
     updateOptions();
-    option = document.createElement("option");
-    option.text = numBodyshot;
-    bs.add(option);
-    option = document.createElement("option");
-    option.text = numLowerBodyshot;
-    lbs.add(option);
-    option = document.createElement("option");
-    option.text = numHeadshot;
-    hss.add(option);
-    option = document.createElement("option");
-    option.text = numUpLegshot;
-    uls.add(option);
+    includeOptions(bs, numBodyshot, maxBodyshot)
+    includeOptions(lbs, numLowerBodyshot, maxLowerBodyshot)
+    includeOptions(hss, numHeadshot, maxHeadshot)
+    includeOptions(uls, numUpLegshot, maxUpLegShot)
 
-    for (j = 0; (j <= maxBodyshot) || j < numBodyshot; j++) {
-        option = document.createElement("option");
-        option.text = j;
-        if (j != numBodyshot || j == 0) {
-            bs.add(option);
-        }
-
-    }
-    for (j = 0; (j <= maxUpLegShot) || j < numUpLegshot; j++) {
-        option = document.createElement("option");
-        option.text = j;
-        if (j != numUpLegshot || j == 0) {
-            uls.add(option);
-        }
-
-    }
-
-    for (j = 0; (j <= maxLowerBodyshot) || j < numLowerBodyshot; j++) {
-
-        option = document.createElement("option");
-        option.text = j;
-        if (j != numLowerBodyshot || j == 0) {
-            lbs.add(option);
-        }
-    }
-
-    for (j = 0; (j <= maxHeadshot) || j < numHeadshot; j++) {
-        option = document.createElement("option");
-        option.text = j;
-        if (j != numHeadshot || j == 0) {
-            hss.add(option);
-        }
-    }
-
+    
 }
 let LBDF = false;
 let HSDF = false;
-function textFilledDD() {
-    textFilledLBD();
-    textFilledHSD();
+let ULDF = false;
 
-}
+
 function textFilledLBD(lbd) {
     console.log("fatMonkeyDookie");
     if (lbd.value > 0) {
@@ -586,7 +529,6 @@ function textFilledHSD(hsd) {
     }
         logDTTK()
 }
-let ULDF = false;
 function textFilledULD(uld) {
 
     if (uld.value > 0) {
@@ -598,17 +540,8 @@ function textFilledULD(uld) {
 }
 function logDTTK(){
     if (LBDF && HSDF && ULDF) {
-        gunTTK(document.querySelector('#userInput'),
-            document.querySelector('#userInput1'),
-            document.querySelector('#userInput2'),
-            document.querySelector('#userInput3'),
-            document.querySelector('#userInput4'),
-            document.querySelector('#userInput5'));
-        gunTTKD(
-            document.querySelector('#bs'),
-            document.querySelector('#lbs'),
-            document.querySelector('#hss'),
-            document.querySelector('#uls'));
+        gunTTK();
+        gunTTKD();
 
     }
 }
