@@ -48,27 +48,17 @@
     <p>Find the TTK of old, new, or recently updated cod / wz weapons yourself here. Mix Headshots, body shots, and leg shots to get a diverse ttk.</p>
     <div id="STTK"> 
     <label for="userInput">Gun Name:</label>
-    <input id="userInput" value="My Gun" onchange="nameFill()"> <br> <br>
+    <input id="userInput" value="My Gun" onchange="nameFill(this)"> <br> <br>
     <label for="userInput1">RPM:</label>
-    <input id="userInput1" value="0" onchange="rpmFill()"> <br> <br>
+    <input id="userInput1" value="0" onchange="rpmFill(this)"> <br> <br>
     <label for="userInput2">Upper Torso Damage:</label>
-    <input id="userInput2" value="0" onchange="bDmgFill()"> <br> <br>
-    <!-- <label for="userInput5">T:</label>
-    <input id="userInput5" value="0"> <br> <br> -->
+    <input id="userInput2" value="0" onchange="bDmgFill(this)"> <br> <br>
 
 
 
     <button id="submit" onclick="logGun()">Save Gun</button>
 
-    <!-- <button id="ss" onclick="test(document.querySelector('#userInput'))">test </button> -->
-    <!-- <button id="calc" onclick="gunTTK(
-    document.querySelector('#userInput'),
-    document.querySelector('#userInput1'),
-    document.querySelector('#userInput2'),
-    document.querySelector('#userInput3'),
-    document.querySelector('#userInput4'),
-    document.querySelector('#userInput5'))"> Calculate </button> -->
-    <!-- <button id="none" value="0" onclick="toggleActive('savedGearList')"> TESTT </button> -->
+
     <label for="showTTK">TTK:</label>
     <input id="showTTK" readonly value="0">
     <button onclick="toggleVisible('section2')" >Click Here For Differential TTK (TTK for a mix of Lower body, body, and head shots)</button>
@@ -81,51 +71,34 @@
         <div class="section" id="section2" >
 
     <h2>Differential TTK</h2>
-    <!-- <button onclick="toggleVisible('DTTK')">wank me</button> -->
 
     <div id="DTTK">
 
         <label for="userInput3">Gun Lower Body Damage</label>
-        <input id="userInput3" value="0" onchange="textFilledLBD(document.querySelector('#userInput3'))"> <br> <br>
+        <input id="userInput3" value="0" onchange="textFilledLBD(this)"> <br> <br>
         <label for="userInput4">Gun Headshot Damage</label>
-        <input id="userInput4" value="0" onchange="textFilledHSD(document.querySelector('#userInput4'))"> <br> <br>
+        <input id="userInput4" value="0" onchange="textFilledHSD(this)"> <br> <br>
         <label for="userInput5">Gun Upper Leg Damage</label>
-        <input id="userInput5" value="0" onchange="textFilledULD(document.querySelector('#userInput5'))"> <br> <br>
+        <input id="userInput5" value="0" onchange="textFilledULD(this)"> <br> <br>
 
         <label for="bs">Number of Upper Body Shots:</label>
 
-        <select name="bs" id="bs" onchange="gunTTKD(
-document.querySelector('#bs'),
-document.querySelector('#lbs'),
-document.querySelector('#hss'),
-document.querySelector('#uls'))">
+        <select name="bs" id="bs" onchange="gunTTKD()">
         </select>
 
         <label for="lbs">Number of Lower Body Shots:</label>
 
-        <select name="lbs" id="lbs" onchange="gunTTKD(
-document.querySelector('#bs'),
-document.querySelector('#lbs'),
-document.querySelector('#hss'),
-document.querySelector('#uls'))">
+        <select name="lbs" id="lbs" onchange="gunTTKD()">
         </select>
 
         <label for="hss">Number of Head Shots:</label>
 
-        <select name="hss" id="hss" onchange="gunTTKD(
-document.querySelector('#bs'),
-document.querySelector('#lbs'),
-document.querySelector('#hss'),
-document.querySelector('#uls'))">
+        <select name="hss" id="hss" onchange="gunTTKD()">
         </select>
 
         <label for="uls">Number of Upper Leg Shots:</label>
 
-        <select name="uls" id="uls" onchange="gunTTKD(
-document.querySelector('#bs'),
-document.querySelector('#lbs'),
-document.querySelector('#hss'),
-document.querySelector('#uls'))">
+        <select name="uls" id="uls" onchange="gunTTKD()">
         </select>
         <label for="showDTTK">DTTK:</label>
 
