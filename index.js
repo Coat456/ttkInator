@@ -429,10 +429,12 @@ function getTTKD() {
     ttkD = totalShots / (this.RPM / 60)
     console.log(ttkD);
     if (mHealth <= 0) {
-        showDTTK.value = (ttkD*1000).toString()+"ms";
+        showDTTK.value = (ttkD).toString()+"ms";
         showmHealth.value = "dead"
     } else {
         showmHealth.value = mHealth.toString() + "hp left"
+        showDTTK.value = mHealth.toString() + "hp left";
+
     }
 
 }
