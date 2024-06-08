@@ -24,7 +24,7 @@ var numUpLegshot =0;
 let ttkD;
 let firstCalc = false;
 var thisGear
-
+let ttk;
 
 function listDefault(){
     dPushGear("BP50", 33, 30 ,28, 28, 857.1)
@@ -243,6 +243,7 @@ function gunTTK() {
     console.log(this.Dmg);
     console.log(this.name);
     console.log(this.RPM);
+
     if (valuesZero(checkZero) || valuesNull(checkNull)) {
         console.log("hallo");
 
@@ -251,12 +252,14 @@ function gunTTK() {
         if(ULDF&&HSDF&&LBDF){
     gunTTKD();
         }
-
-        let ttk = (((health / this.Dmg + (1 - ((health % this.Dmg) / this.Dmg))) - 1) / (this.RPM / 60)) * 1000;
+        setSHealth();
+        console.log(mHealth);
+         ttk = (((health / this.Dmg + (1 - ((health % this.Dmg) / this.Dmg))) - 1) / (this.RPM / 60)) * 1000;
         console.log(ttk);
         showTTK.value = Math.round(ttk).toString()+"ms";
     }
 }
+
 function loadGear(ph) {
      thisGear = ph.value;
     console.log(ph.value);
@@ -320,6 +323,11 @@ function selectedNull(){
                 numLowerBodyshot =document.querySelector('#lbs').value
         }
 }
+function setSHealth(){
+mHealth = parseInt(document.getElementById("sHealth").value);
+health= parseInt(document.getElementById("sHealth").value)
+
+}
 function gunTTKD() {
 
 
@@ -331,13 +339,18 @@ function gunTTKD() {
     } else {
         selectedNull();
         mHealth = 300;
+        setSHealth();
+
         // numUpLegshot = document.querySelector('#uls').value
         // numBodyshot = document.querySelector('#bs').value
         // numLowerBodyshot =document.querySelector('#lbs').value
         // numHeadshot = document.querySelector('#hss').value
         console.log(document.querySelector('#hss').value)
         console.log(numHeadshot);
-console.log( document.querySelector('#uls').value == "")
+console.log( document.querySelector('#uls').value == "");
+
+        setSHealth();
+
         getmHealth(numBodyshot,this.Dmg);
         getmHealth(numHeadshot,this.headDmg);
         getmHealth(numLowerBodyshot,this.lowerBodyDmg);
@@ -349,6 +362,7 @@ console.log( document.querySelector('#uls').value == "")
 
 }
 function getmHealth(numShots, dmg){
+    mHealth = sHealth;
     mHealth -=numShots*dmg;
 }
 function valuesNull(x) {
