@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="keywords" content="ttk, Time to kill, warzone, call of duty, cod, wz, calculator, body shot, head shot, leg shot">
     <meta name="description" content="Find the TTK of old, new, or updated COD Guns before anyone else with TTKinator . Calculate TTK and DTTK easily with this tool.">
-    <meta property="og:title" content="Warzone TTK Calculator" />
+    <meta property="og:title" content="TTK Inator" />
     <meta property="og:type" content="website" />
     <!-- <meta property="og:url" content="https://www.imdb.com/title/tt0117500/" /> -->
     <meta property="og:image" content=Untitled_Export_V1.jpeg />
@@ -45,8 +45,18 @@
 
 
     <h1>TTK</h1>
-    <p>    <p>Find the TTK of old, new, or updated COD Guns before anyone else with TTKinator . Calculate TTK and DTTK easily with this tool.</p>
+    <p>Find the TTK of old, new, or updated COD Guns before anyone else with TTKinator . Calculate TTK and DTTK easily with this tool.</p>
     <div id="STTK"> 
+        <label for="sHealth">Player Health</label>
+        <select id="sHealth" value="300" onchange="gunTTK()"> 
+            <option value = 300>300hp</option>
+            <option value = 250>250hp</option>
+            <option value = 200>200hp</option>
+            <option value = 150>150hp</option>
+            <option value = 120>120hp</option>
+            <option value = 100>100hp</option>
+        </select>
+
     <label for="userInput">Gun Name:</label>
     <input id="userInput" value="My Gun" onchange="nameFill(this)"> <br> <br>
     <label for="userInput1">RPM:</label>
@@ -131,7 +141,7 @@
         clbDmg = document.getElementById("userInput3")
         chsDmg = document.getElementById("userInput4")
         culDmg = document.getElementById("userInput5")
-
+        
         showmHealth = document.getElementById("mHealth");
         showDTTK = document.getElementById("showDTTK");
         gearList = document.getElementById("gearList");
