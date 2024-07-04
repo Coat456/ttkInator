@@ -254,7 +254,7 @@ function gunTTK() {
         }
         setSHealth();
         console.log(mHealth);
-         ttk = (((health / this.Dmg + (1 - ((health % this.Dmg) / this.Dmg))) - 1) / (this.RPM / 60)) * 1000;
+         ttk = Math.ceil((health / this.Dmg / (this.RPM / 60))) * 1000;
         console.log(ttk);
         showTTK.value = Math.round(ttk).toString()+"ms";
     }
